@@ -1,10 +1,18 @@
 const DEFAULT_SIZE = 16;
-const DEFAULT_COLOUR = "#333333";
+const DEFAULT_COLOR = "#333333";
 
 const grid = document.querySelector(".container");
 const colorPicker = document.querySelector("#colorPicker");
 
-generateGrid(DEFAULT_SIZE);
+let size = DEFAULT_SIZE;
+const size16 = document.querySelector("#btn16");
+const size32 = document.querySelector("#btn32");
+const size64 = document.querySelector("#btn64");
+size16.addEventListener("click", () => { size = 16; changeSize(size)})
+size32.addEventListener("click", () => { size = 32; changeSize(size)})
+size64.addEventListener("click", () => { size = 64; changeSize(size)})
+
+generateGrid(size);
 
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
@@ -31,4 +39,12 @@ function draw(e) {
     }
 }
 
-console.log(mouseDown);
+function changeSize(size) {
+    resetGrid();
+    generateGrid(size);
+}
+
+function resetGrid() {
+    grid.innerHTML = "";
+}
+
